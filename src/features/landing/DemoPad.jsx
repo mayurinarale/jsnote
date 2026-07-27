@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { SaveStatus } from "@/features/notes/SaveStatus";
 import { countWords } from "@/lib/format";
 
 const SEED = "Open → Type → Done.\n\nThis pad is real. Type in it.\nNothing here is saved — your actual notes are.";
@@ -40,7 +39,7 @@ export function DemoPad() {
         <span>
           {words} {words === 1 ? "word" : "words"}
         </span>
-        <SaveStatus status="saved" />
+        <span>Demo only — nothing here is stored</span>
       </div>
     </div>
   );
