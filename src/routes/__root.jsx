@@ -114,7 +114,9 @@ export const Route = createRootRouteWithContext()({
 /** @param {{children: React.ReactNode}} props */
 function RootShell({ children }) {
   return (
-    <html lang="en">
+    // The theme bootstrap script mutates <html> before hydration on purpose
+    // (no flash of the wrong theme), so its attributes are expected to differ.
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
