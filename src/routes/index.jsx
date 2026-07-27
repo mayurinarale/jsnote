@@ -39,10 +39,8 @@ function NotesHome() {
     if (workspace.status !== "ready") return;
     handled.current = true;
 
-    const newest = workspace.notes[0];
-    const target = newest && !newest.body ? newest : newest ?? createNote();
-    const id = (target ?? createNote()).id;
-    navigate({ to: "/n/$id", params: { id }, replace: true });
+    const target = workspace.notes[0] ?? createNote();
+    navigate({ to: "/app/n/$id", params: { id: target.id }, replace: true });
   }, [createNote, navigate, workspace.notes, workspace.status]);
 
   return (
