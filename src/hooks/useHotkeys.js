@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 /**
- * Global keyboard shortcuts. QuickNote is keyboard-first, so bindings live in
+ * Global keyboard shortcuts. Note is keyboard-first, so bindings live in
  * one place rather than being scattered across components.
  *
  * @param {Record<string, (event: KeyboardEvent) => void>} bindings

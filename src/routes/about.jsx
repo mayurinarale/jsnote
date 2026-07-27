@@ -10,13 +10,13 @@ import { ShortcutShowcase } from "@/features/landing/ShortcutShowcase";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "QuickNote — Open. Type. Done." },
+      { title: "Note — Open. Type. Done." },
       {
         name: "description",
         content:
-          "QuickNote is a frictionless thinking tool. No folders, no setup, no ceremony — just a page that's ready before you are.",
+          "Note is a frictionless thinking tool. No folders, no setup, no ceremony — just a page that's ready before you are.",
       },
-      { property: "og:title", content: "QuickNote — Open. Type. Done." },
+      { property: "og:title", content: "Note — Open. Type. Done." },
       {
         property: "og:description",
         content: "A frictionless thinking tool. No folders, no setup — just write.",
@@ -52,12 +52,12 @@ function Landing() {
       <header className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-5 py-5 sm:px-8">
         <span className="inline-flex min-w-0 items-center gap-2">
           <PenLine className="size-5 shrink-0 text-primary" aria-hidden="true" />
-          <span className="truncate font-display text-xl leading-none">QuickNote</span>
+          <span className="truncate font-display text-xl leading-none">Note</span>
         </span>
         <div className="flex shrink-0 items-center gap-2">
           <ThemeToggle />
           <Link to="/app">
-            <Button size="sm">Open QuickNote</Button>
+            <Button size="sm">Open Note</Button>
           </Link>
         </div>
       </header>
@@ -71,7 +71,7 @@ function Landing() {
             Open. Type. Done.
           </h1>
           <p className="mx-auto mt-6 max-w-xl font-reading text-lg leading-8 text-muted-foreground">
-            Most note apps ask you to organise before you think. QuickNote gives you a
+            Most note apps ask you to organise before you think. Note gives you a
             page that's already waiting — and gets out of the way for good.
           </p>
           <div className="mt-9 flex flex-col items-center gap-3">
@@ -95,7 +95,7 @@ function Landing() {
         </section>
 
         <section
-          aria-label="Why QuickNote"
+          aria-label="Why Note"
           className="mx-auto grid w-full max-w-5xl gap-4 px-5 pb-20 sm:grid-cols-3 sm:px-8"
         >
           {PILLARS.map(({ icon: Icon, title, body }) => (

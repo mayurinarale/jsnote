@@ -81,13 +81,13 @@ export const Route = createRootRouteWithContext()({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "QuickNote — Open. Type. Done." },
+      { title: "Note — Open. Type. Done." },
       {
         name: "description",
         content:
           "A frictionless thinking tool. No folders, no setup — just a page that's ready before you are.",
       },
-      { property: "og:title", content: "QuickNote — Open. Type. Done." },
+      { property: "og:title", content: "Note — Open. Type. Done." },
       {
         property: "og:description",
         content: "A frictionless thinking tool. No folders, no setup — just write.",

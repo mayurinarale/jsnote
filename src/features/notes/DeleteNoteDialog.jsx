@@ -3,7 +3,7 @@ import { Dialog } from "@/components/ui/Dialog";
 
 /**
  * Destructive confirmation. Deletion is the only irreversible action in
- * QuickNote, so it is the only one that interrupts the writer.
+ * Note, so it is the only one that interrupts the writer.
  * @param {{open: boolean, onCancel: () => void, onConfirm: () => void}} props
  */
 export function DeleteNoteDialog({ open, onCancel, onConfirm }) {

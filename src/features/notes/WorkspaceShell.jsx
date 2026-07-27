@@ -98,7 +98,7 @@ export function WorkspaceShell({ workspace, selectedId, showListOnMobile, childr
               ) : isMobile ? (
                 <span className="inline-flex items-center gap-2 px-2">
                   <PenLine className="size-4 text-primary" aria-hidden="true" />
-                  <span className="font-display text-lg leading-none">QuickNote</span>
+                  <span className="font-display text-lg leading-none">Note</span>
                 </span>
               ) : (
                 <IconButton label={sidebarOpen ? "Hide notes list" : "Show notes list"} onClick={toggleSidebar}>

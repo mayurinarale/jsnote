@@ -10,13 +10,13 @@ import { useNotesWorkspace } from "@/features/notes/useNotesWorkspace";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your notes — QuickNote" },
+      { title: "Your notes — Note" },
       {
         name: "description",
         content:
-          "Open QuickNote and start typing. Notes save to your device instantly — no folders, no setup, no save button.",
+          "Open Note and start typing. Notes save to your device instantly — no folders, no setup, no save button.",
       },
-      { property: "og:title", content: "Your notes — QuickNote" },
+      { property: "og:title", content: "Your notes — Note" },
       {
         property: "og:description",
         content: "Open. Type. Done. A frictionless notes workspace that works offline.",
