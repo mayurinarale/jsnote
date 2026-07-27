@@ -7,7 +7,7 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { DemoPad } from "@/features/landing/DemoPad";
 import { ShortcutShowcase } from "@/features/landing/ShortcutShowcase";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "QuickNote — Open. Type. Done." },
