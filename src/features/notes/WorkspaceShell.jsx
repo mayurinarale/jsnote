@@ -89,7 +89,7 @@ export function WorkspaceShell({ workspace, selectedId, showListOnMobile, childr
             <header className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 border-b border-border px-2 py-2">
               {isMobile && !showListOnMobile ? (
                 <Link
-                  to="/app"
+                  to="/"
                   aria-label="Back to all notes"
                   className="inline-flex size-11 shrink-0 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
                 >

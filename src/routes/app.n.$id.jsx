@@ -38,7 +38,7 @@ function NoteRoute() {
     setConfirmingDelete(false);
     await deleteNote(id);
     pushToast({ title: "Note deleted", tone: "destructive" });
-    navigate({ to: "/app" });
+    navigate({ to: "/" });
   }, [deleteNote, id, navigate, pushToast]);
 
   let body;
@@ -50,7 +50,7 @@ function NoteRoute() {
         icon={FileQuestion}
         title="This note isn't here"
         description="It may have been deleted on this device."
-        action={<Button onClick={() => navigate({ to: "/app" })}>Back to notes</Button>}
+        action={<Button onClick={() => navigate({ to: "/" })}>Back to notes</Button>}
       />
     );
   } else {
