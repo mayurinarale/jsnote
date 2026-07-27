@@ -32,10 +32,10 @@ export function Editor({
   // Open → Type: the caret lands in the body the moment a note is opened.
   useEffect(() => {
     const el = textareaRef.current;
-    if (!el) return;
-    el.focus();
+    if (!el || previewMode) return;
+    el.focus({ preventScroll: true });
     el.setSelectionRange(el.value.length, el.value.length);
-  }, [note.id]);
+  }, [note.id, previewMode]);
 
   const words = countWords(note.body);
 
@@ -70,6 +70,7 @@ export function Editor({
               <textarea
                 id="note-body"
                 ref={textareaRef}
+                autoFocus
                 value={note.body}
                 onChange={(event) => onChange(event.target.value)}
                 spellCheck
