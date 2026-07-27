@@ -4,6 +4,8 @@ import { ArrowRight, Keyboard, PenLine, WifiOff } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { ShortcutHint } from "@/components/ui/ShortcutHint";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { DemoPad } from "@/features/landing/DemoPad";
+import { ShortcutShowcase } from "@/features/landing/ShortcutShowcase";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -86,8 +88,15 @@ function Landing() {
         </section>
 
         <section
+          aria-label="Live demo"
+          className="mx-auto w-full max-w-3xl px-5 pb-20 sm:px-8"
+        >
+          <DemoPad />
+        </section>
+
+        <section
           aria-label="Why QuickNote"
-          className="mx-auto grid w-full max-w-5xl gap-4 px-5 pb-24 sm:grid-cols-3 sm:px-8"
+          className="mx-auto grid w-full max-w-5xl gap-4 px-5 pb-20 sm:grid-cols-3 sm:px-8"
         >
           {PILLARS.map(({ icon: Icon, title, body }) => (
             <article key={title} className="rounded-2xl border border-border bg-surface p-6">
@@ -98,6 +107,19 @@ function Landing() {
               <p className="mt-2 text-sm leading-6 text-muted-foreground">{body}</p>
             </article>
           ))}
+        </section>
+
+        <section
+          aria-label="Keyboard shortcuts"
+          className="mx-auto w-full max-w-3xl px-5 pb-24 sm:px-8"
+        >
+          <h2 className="font-display text-2xl tracking-tight">Everything has a key</h2>
+          <p className="mt-2 max-w-prose text-sm leading-6 text-muted-foreground">
+            Learn these four and you never need the mouse again.
+          </p>
+          <div className="mt-6">
+            <ShortcutShowcase />
+          </div>
         </section>
       </main>
 
