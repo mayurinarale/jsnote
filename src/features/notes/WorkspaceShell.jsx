@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, Menu, PenLine, Plus, Search } from "lucide-react";
+import { ArrowLeft, Menu, Plus, Search } from "lucide-react";
 import { useEffect } from "react";
 
 import { SearchOverlay } from "./SearchOverlay";
