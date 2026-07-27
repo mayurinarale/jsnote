@@ -1,4 +1,5 @@
-import { Menu, PenLine, Plus, Search } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowLeft, Menu, PenLine, Plus, Search } from "lucide-react";
 import { useEffect } from "react";
 
 import { SearchOverlay } from "./SearchOverlay";
@@ -86,7 +87,15 @@ export function WorkspaceShell({ workspace, selectedId, showListOnMobile, childr
           {/* Compact header: tablet toggle + mobile actions */}
           {!isDesktop ? (
             <header className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 border-b border-border px-2 py-2">
-              {isMobile ? (
+              {isMobile && !showListOnMobile ? (
+                <Link
+                  to="/app"
+                  aria-label="Back to all notes"
+                  className="inline-flex size-11 shrink-0 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-foreground"
+                >
+                  <ArrowLeft className="size-5" aria-hidden="true" />
+                </Link>
+              ) : isMobile ? (
                 <span className="inline-flex items-center gap-2 px-2">
                   <PenLine className="size-4 text-primary" aria-hidden="true" />
                   <span className="font-display text-lg leading-none">QuickNote</span>
