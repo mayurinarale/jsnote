@@ -1,6 +1,6 @@
 /**
  * Derives a human title from note body text.
- * QuickNote has no title field by design (Open → Type → Done).
+ * Note has no title field by design (Open → Type → Done).
  * @param {string} body
  * @returns {string}
  */

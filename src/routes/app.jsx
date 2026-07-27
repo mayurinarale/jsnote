@@ -3,13 +3,13 @@ import { Outlet, createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/app")({
   head: () => ({
     meta: [
-      { title: "Your notes — QuickNote" },
+      { title: "Your notes — Note" },
       {
         name: "description",
         content:
-          "A distraction-free workspace for fast capture. Your notes stay on this device and are ready the moment you open QuickNote.",
+          "A distraction-free workspace for fast capture. Your notes stay on this device and are ready the moment you open Note.",
       },
-      { property: "og:title", content: "Your notes — QuickNote" },
+      { property: "og:title", content: "Your notes — Note" },
       {
         property: "og:description",
         content: "A distraction-free workspace for fast capture. Open, type, done.",

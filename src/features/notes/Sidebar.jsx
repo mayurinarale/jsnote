@@ -39,7 +39,7 @@ export function Sidebar({
       <div className="flex items-center justify-between gap-2 border-b border-sidebar-border px-4 py-3">
         <Link to="/" className="inline-flex min-w-0 items-center gap-2">
           <PenLine className="size-4 shrink-0 text-primary" aria-hidden="true" />
-          <span className="truncate font-display text-lg leading-none">QuickNote</span>
+          <span className="truncate font-display text-lg leading-none">Note</span>
         </Link>
         <Button size="sm" onClick={onCreate}>
           <Plus className="size-4" aria-hidden="true" />

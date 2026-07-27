@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Canonical empty state. Every empty surface in QuickNote uses this so the
+ * Canonical empty state. Every empty surface in Note uses this so the
  * voice, spacing and hierarchy stay identical.
  * @param {{
  *  icon?: React.ElementType,

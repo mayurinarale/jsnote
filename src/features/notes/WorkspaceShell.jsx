@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, Menu, PenLine, Plus, Search } from "lucide-react";
+import { ArrowLeft, Menu, Plus, Search } from "lucide-react";
 import { useEffect } from "react";
 
 import { SearchOverlay } from "./SearchOverlay";
@@ -96,10 +96,7 @@ export function WorkspaceShell({ workspace, selectedId, showListOnMobile, childr
                   <ArrowLeft className="size-5" aria-hidden="true" />
                 </Link>
               ) : isMobile ? (
-                <span className="inline-flex items-center gap-2 px-2">
-                  <PenLine className="size-4 text-primary" aria-hidden="true" />
-                  <span className="font-display text-lg leading-none">QuickNote</span>
-                </span>
+                <span />
               ) : (
                 <IconButton label={sidebarOpen ? "Hide notes list" : "Show notes list"} onClick={toggleSidebar}>
                   <Menu className="size-5" aria-hidden="true" />

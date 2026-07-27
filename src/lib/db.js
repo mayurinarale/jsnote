@@ -37,7 +37,7 @@ function isBrowser() {
 }
 
 /**
- * Lazily opens (and upgrades) the QuickNote database.
+ * Lazily opens (and upgrades) the Note database.
  * @returns {Promise<import("idb").IDBPDatabase|null>}
  */
 export function getDb() {
