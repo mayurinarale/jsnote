@@ -1,20 +1,16 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, Menu, Plus, Search } from "lucide-react";
-import { useEffect } from "react";
+import { ArrowLeft, Plus, Search } from "lucide-react";
 
 import { SearchOverlay } from "./SearchOverlay";
 import { Sidebar } from "./Sidebar";
+import { BrandMark } from "@/components/BrandMark";
 import { IconButton } from "@/components/ui/IconButton";
-import { useUiStore } from "@/app/stores/useUiStore";
-import { useIsDesktop, useIsMobileViewport } from "@/hooks/useMediaQuery";
-import { cn } from "@/lib/utils";
+import { useIsMobileViewport } from "@/hooks/useMediaQuery";
 
 /**
  * Responsive workspace chrome.
- * Desktop  → persistent two-pane layout.
- * Tablet   → collapsible sidebar overlaying the pane.
- * Mobile   → list and editor are separate screens (routing decides which is
- *            visible) plus a floating action button.
+ * Writing stays center-left; saved notes sit in a slim rail on the right.
+ * Mobile keeps list and editor as separate screens.
  *
  * @param {{
  *  workspace: ReturnType<typeof import("./useNotesWorkspace").useNotesWorkspace>,
@@ -38,16 +34,7 @@ export function WorkspaceShell({ workspace, selectedId, showListOnMobile, childr
     retry,
   } = workspace;
 
-  const isDesktop = useIsDesktop();
   const isMobile = useIsMobileViewport();
-  const sidebarOpen = useUiStore((state) => state.sidebarOpen);
-  const setSidebarOpen = useUiStore((state) => state.setSidebarOpen);
-  const toggleSidebar = useUiStore((state) => state.toggleSidebar);
-
-  // On tablet the sidebar overlays content, so it starts closed.
-  useEffect(() => {
-    setSidebarOpen(isDesktop);
-  }, [isDesktop, setSidebarOpen]);
 
   const sidebar = (
     <Sidebar
@@ -69,25 +56,10 @@ export function WorkspaceShell({ workspace, selectedId, showListOnMobile, childr
       </a>
 
       <div className="flex min-h-0 flex-1">
-        {/* Desktop / tablet sidebar */}
-        {!isMobile ? (
-          <aside
-            aria-label="Notes sidebar"
-            className={cn(
-              "z-30 h-full w-[19rem] shrink-0 border-r border-sidebar-border",
-              isDesktop ? "static" : "absolute inset-y-0 left-0 shadow-overlay",
-              !sidebarOpen && !isDesktop && "hidden",
-            )}
-          >
-            {sidebar}
-          </aside>
-        ) : null}
-
         <div className="flex min-h-0 min-w-0 flex-1 flex-col">
-          {/* Compact header: tablet toggle + mobile actions */}
-          {!isDesktop ? (
+          {isMobile ? (
             <header className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 border-b border-border px-2 py-2">
-              {isMobile && !showListOnMobile ? (
+              {!showListOnMobile ? (
                 <Link
                   to="/"
                   aria-label="Back to all notes"
@@ -95,14 +67,14 @@ export function WorkspaceShell({ workspace, selectedId, showListOnMobile, childr
                 >
                   <ArrowLeft className="size-5" aria-hidden="true" />
                 </Link>
-              ) : isMobile ? (
-                <span />
               ) : (
-                <IconButton label={sidebarOpen ? "Hide notes list" : "Show notes list"} onClick={toggleSidebar}>
-                  <Menu className="size-5" aria-hidden="true" />
-                </IconButton>
+                <span />
               )}
-              <span />
+              {!showListOnMobile ? (
+                <BrandMark size="sm" className="justify-center" />
+              ) : (
+                <span />
+              )}
               <IconButton label="Search notes" onClick={openSearch}>
                 <Search className="size-5" aria-hidden="true" />
               </IconButton>
@@ -117,9 +89,18 @@ export function WorkspaceShell({ workspace, selectedId, showListOnMobile, childr
             )}
           </main>
         </div>
+
+        {/* Saved notes — slim column on the right */}
+        {!isMobile ? (
+          <aside
+            aria-label="Your notes"
+            className="h-full w-[14.5rem] shrink-0 border-l border-sidebar-border bg-sidebar"
+          >
+            {sidebar}
+          </aside>
+        ) : null}
       </div>
 
-      {/* Mobile floating action button */}
       {isMobile && showListOnMobile ? (
         <button
           type="button"

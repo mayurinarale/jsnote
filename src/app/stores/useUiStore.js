@@ -12,7 +12,6 @@ export const useUiStore = create((set, get) => ({
   sidebarOpen: true,
   searchOpen: false,
   searchQuery: "",
-  previewMode: false,
   online: true,
   /** @type {{id: string, title: string, description?: string, tone: "default"|"destructive"}[]} */
   toasts: [],
@@ -39,8 +38,6 @@ export const useUiStore = create((set, get) => ({
   closeSearch: () => set({ searchOpen: false, searchQuery: "" }),
   /** @param {string} searchQuery */
   setSearchQuery: (searchQuery) => set({ searchQuery }),
-
-  togglePreview: () => set((state) => ({ previewMode: !state.previewMode })),
 
   /** @param {boolean} online */
   setOnline: (online) => set({ online }),

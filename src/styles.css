@@ -249,3 +249,29 @@
     clip-path: none;
   }
 }
+
+/* Markdown preview: keep task items on one calm line. */
+.markdown-preview ul.contains-task-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.markdown-preview li.task-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.125rem;
+}
+
+.markdown-preview li.task-list-item > p {
+  display: inline;
+  margin: 0;
+}
+
+.markdown-preview li.task-list-item:has(> [aria-checked="true"]) {
+  color: var(--muted-foreground);
+}
+
+.markdown-preview li.task-list-item:has(> [aria-checked="true"]) > p {
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}

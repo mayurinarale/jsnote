@@ -39,7 +39,7 @@ export function NoteList({ notes, selectedId, status, online, firstLaunch, onCre
     return (
       <EmptyState
         icon={FileText}
-        title={firstLaunch ? "Welcome to Note" : "No notes yet"}
+        title={firstLaunch ? "Welcome to jsnote" : "No notes yet"}
         description={
           firstLaunch
             ? "One keystroke from thought to text. Start with an empty page."

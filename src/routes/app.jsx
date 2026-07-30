@@ -3,13 +3,13 @@ import { Outlet, createFileRoute } from "@tanstack/react-router";
 export const Route = createFileRoute("/app")({
   head: () => ({
     meta: [
-      { title: "Your notes — Note" },
+      { title: "Your notes — jsnote" },
       {
         name: "description",
         content:
-          "A distraction-free workspace for fast capture. Your notes stay on this device and are ready the moment you open Note.",
+          "A distraction-free workspace for fast capture. Your notes stay on this device and are ready the moment you open jsnote.",
       },
-      { property: "og:title", content: "Your notes — Note" },
+      { property: "og:title", content: "Your notes — jsnote" },
       {
         property: "og:description",
         content: "A distraction-free workspace for fast capture. Open, type, done.",

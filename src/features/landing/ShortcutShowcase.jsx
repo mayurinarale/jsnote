@@ -4,7 +4,7 @@ import { ShortcutHint } from "@/components/ui/ShortcutHint";
 const SHORTCUTS = [
   { keys: ["mod", "n"], label: "New note" },
   { keys: ["mod", "k"], label: "Search notes" },
-  { keys: ["mod", "b"], label: "Toggle the notes list" },
+  { keys: ["mod", "enter"], label: "Toggle checklist on line" },
   { keys: ["escape"], label: "Close search" },
 ];
 

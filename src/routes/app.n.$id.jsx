@@ -25,8 +25,8 @@ function NoteRoute() {
   const note = useNotesStore((state) => state.notes.find((item) => item.id === id));
   const updateNoteBody = useNotesStore((state) => state.updateNoteBody);
   const deleteNote = useNotesStore((state) => state.deleteNote);
-  const previewMode = useUiStore((state) => state.previewMode);
-  const togglePreview = useUiStore((state) => state.togglePreview);
+  const setNoteShare = useNotesStore((state) => state.setNoteShare);
+  const clearNoteShare = useNotesStore((state) => state.clearNoteShare);
   const pushToast = useUiStore((state) => state.pushToast);
 
   const handleChange = useCallback(
@@ -40,6 +40,19 @@ function NoteRoute() {
     pushToast({ title: "Note deleted", tone: "destructive" });
     navigate({ to: "/" });
   }, [deleteNote, id, navigate, pushToast]);
+
+  const handleShared = useCallback(
+    (meta) => {
+      setNoteShare(id, meta);
+      pushToast({ title: "Link ready", description: "Anyone with the link can read this snapshot." });
+    },
+    [id, pushToast, setNoteShare],
+  );
+
+  const handleShareRevoked = useCallback(() => {
+    clearNoteShare(id);
+    pushToast({ title: "Sharing stopped", description: "The old link no longer works." });
+  }, [clearNoteShare, id, pushToast]);
 
   let body;
   if (workspace.status === "loading" || workspace.status === "idle") {
@@ -58,10 +71,10 @@ function NoteRoute() {
       <Editor
         note={note}
         saveStatus={workspace.saveStatus}
-        previewMode={previewMode}
         onChange={handleChange}
-        onTogglePreview={togglePreview}
         onRequestDelete={() => setConfirmingDelete(true)}
+        onShared={handleShared}
+        onShareRevoked={handleShareRevoked}
       />
     );
   }

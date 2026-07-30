@@ -8,6 +8,9 @@ import { openDB } from "idb";
  * @property {number} updatedAt
  * @property {boolean} pinned
  * @property {boolean} deleted soft delete, so sync can propagate tombstones
+ * @property {string} [shareId] public snapshot id when shared
+ * @property {string} [shareRevokeToken] author-only token to update/revoke
+ * @property {number} [sharedAt] when the public snapshot was last published
  */
 
 /**

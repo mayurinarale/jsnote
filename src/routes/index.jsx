@@ -9,13 +9,13 @@ import { useNotesWorkspace } from "@/features/notes/useNotesWorkspace";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your notes — Note" },
+      { title: "Your notes — jsnote" },
       {
         name: "description",
         content:
-          "Open Note and start typing. Notes save to your device instantly — no folders, no setup, no save button.",
+          "Open jsnote and start typing. Notes save to your device instantly — no folders, no setup, no save button.",
       },
-      { property: "og:title", content: "Your notes — Note" },
+      { property: "og:title", content: "Your notes — jsnote" },
       {
         property: "og:description",
         content: "Open. Type. Done. A frictionless notes workspace that works offline.",
@@ -31,6 +31,7 @@ function NotesHome() {
   const workspace = useNotesWorkspace();
   const navigate = useNavigate();
   const createNote = useNotesStore((state) => state.createNote);
+  const rawNotes = useNotesStore((state) => state.notes);
   const handled = useRef(false);
 
   // Open → Type: land straight in a writable note, never on a chooser screen.
@@ -39,9 +40,11 @@ function NotesHome() {
     if (workspace.status !== "ready") return;
     handled.current = true;
 
-    const target = workspace.notes[0] ?? createNote();
+    // Prefer a note with content; otherwise open (or reuse) a blank draft.
+    const withContent = rawNotes.find((note) => note.body.trim());
+    const target = withContent ?? createNote();
     navigate({ to: "/app/n/$id", params: { id: target.id }, replace: true });
-  }, [createNote, navigate, workspace.notes, workspace.status]);
+  }, [createNote, navigate, rawNotes, workspace.status]);
 
   return (
     <WorkspaceShell workspace={workspace} selectedId={null} showListOnMobile={false}>

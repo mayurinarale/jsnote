@@ -7,7 +7,7 @@ import { useHotkeys } from "@/hooks/useHotkeys";
 import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 
 /** ⌘K / ⌘N must still fire while the caret is inside the editor. */
-const ALLOW_IN_INPUTS = ["mod+k", "mod+n", "mod+b", "mod+/"];
+const ALLOW_IN_INPUTS = ["mod+k", "mod+n", "mod+/"];
 
 /**
  * Single integration point between the workspace UI and the stores.
@@ -37,7 +37,6 @@ export function useNotesWorkspace({ selectedId = null } = {}) {
   const openSearch = useUiStore((state) => state.openSearch);
   const closeSearch = useUiStore((state) => state.closeSearch);
   const setSearchQuery = useUiStore((state) => state.setSearchQuery);
-  const toggleSidebar = useUiStore((state) => state.toggleSidebar);
 
   useEffect(() => {
     void hydrate();
@@ -56,10 +55,9 @@ export function useNotesWorkspace({ selectedId = null } = {}) {
     () => ({
       "mod+k": openSearch,
       "mod+n": handleCreate,
-      "mod+b": toggleSidebar,
       "mod+/": openSearch,
     }),
-    [handleCreate, openSearch, toggleSidebar],
+    [handleCreate, openSearch],
   );
 
   useHotkeys(bindings, { allowInInputs: ALLOW_IN_INPUTS });

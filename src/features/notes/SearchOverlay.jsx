@@ -1,15 +1,13 @@
 import { useNavigate } from "@tanstack/react-router";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-import { ShortcutHint } from "@/components/ui/ShortcutHint";
+import { IconButton } from "@/components/ui/IconButton";
 import { derivePreview, deriveTitle } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
 /**
- * Command-palette style search. UI + keyboard model only in this phase:
- * matching is a simple local substring filter and will be replaced by the
- * indexed search service when the backend lands.
+ * Command-palette style search. Local substring filter — fast and offline.
  *
  * @param {{
  *  open: boolean,
@@ -74,8 +72,8 @@ export function SearchOverlay({ open, query, notes, onQueryChange, onClose }) {
         aria-label="Search notes"
         className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-border bg-popover shadow-overlay"
       >
-        <div className="flex items-center gap-3 border-b border-border px-4">
-          <Search className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+        <div className="flex items-center gap-2 border-b border-border px-3">
+          <Search className="ml-1 size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
           <input
             ref={inputRef}
             type="text"
@@ -88,9 +86,11 @@ export function SearchOverlay({ open, query, notes, onQueryChange, onClose }) {
             onChange={(event) => onQueryChange(event.target.value)}
             onKeyDown={onKeyDown}
             placeholder="Search your notes…"
-            className="h-14 flex-1 bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground"
+            className="h-14 min-w-0 flex-1 bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground"
           />
-          <ShortcutHint keys={["escape"]} />
+          <IconButton label="Close search" size="sm" onClick={onClose}>
+            <X className="size-4" aria-hidden="true" />
+          </IconButton>
         </div>
 
         <ul id="search-results" role="listbox" aria-label="Search results" className="max-h-80 overflow-y-auto p-2">
@@ -123,15 +123,6 @@ export function SearchOverlay({ open, query, notes, onQueryChange, onClose }) {
             ))
           )}
         </ul>
-
-        <div className="flex items-center gap-4 border-t border-border px-4 py-2 text-xs text-muted-foreground">
-          <span className="inline-flex items-center gap-1.5">
-            <ShortcutHint keys={["↑", "↓"]} /> navigate
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <ShortcutHint keys={["enter"]} /> open
-          </span>
-        </div>
       </div>
     </div>
   );

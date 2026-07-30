@@ -81,16 +81,16 @@ export const Route = createRootRouteWithContext()({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Note — Open. Type. Done." },
+      { title: "jsnote — Open. Type. Done." },
       {
         name: "description",
         content:
-          "A frictionless thinking tool. No folders, no setup — just a page that's ready before you are.",
+          "jsnote is a frictionless thinking tool. No folders, no setup — just a page that's ready before you are.",
       },
-      { property: "og:title", content: "Note — Open. Type. Done." },
+      { property: "og:title", content: "jsnote — Open. Type. Done." },
       {
         property: "og:description",
-        content: "A frictionless thinking tool. No folders, no setup — just write.",
+        content: "jsnote is a frictionless thinking tool. No folders, no setup — just write.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
