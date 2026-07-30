@@ -1,6 +1,3 @@
-import { mkdir, readFile, unlink, writeFile } from "node:fs/promises";
-import path from "node:path";
-
 /**
  * @typedef {Object} SharedSnapshot
  * @property {string} id
@@ -11,19 +8,17 @@ import path from "node:path";
  * @property {string} revokeToken
  */
 
-const DIR = path.join(process.cwd(), ".data", "shares");
-
 /** @param {string} id */
-function fileFor(id) {
-  // Guard path traversal — ids are alphabet-only from createShareId.
-  if (!/^[A-Za-z0-9]+$/.test(id)) {
+function assertId(id) {
+  if (!/^[A-Za-z0-9]{1,64}$/.test(id)) {
     throw new Error("Invalid share id");
   }
-  return path.join(DIR, `${id}.json`);
+  return id;
 }
 
-async function ensureDir() {
-  await mkdir(DIR, { recursive: true });
+async function admin() {
+  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+  return supabaseAdmin;
 }
 
 /**
@@ -31,8 +26,16 @@ async function ensureDir() {
  * @returns {Promise<void>}
  */
 export async function writeShare(share) {
-  await ensureDir();
-  await writeFile(fileFor(share.id), JSON.stringify(share), "utf8");
+  const db = await admin();
+  const { error } = await db.from("shared_notes").upsert({
+    id: assertId(share.id),
+    title: share.title,
+    body: share.body,
+    revoke_token: share.revokeToken,
+    created_at: new Date(share.createdAt).toISOString(),
+    updated_at: new Date(share.updatedAt).toISOString(),
+  });
+  if (error) throw new Error(error.message);
 }
 
 /**
@@ -40,12 +43,21 @@ export async function writeShare(share) {
  * @returns {Promise<SharedSnapshot|null>}
  */
 export async function readShare(id) {
-  try {
-    const raw = await readFile(fileFor(id), "utf8");
-    return JSON.parse(raw);
-  } catch {
-    return null;
-  }
+  const db = await admin();
+  const { data, error } = await db
+    .from("shared_notes")
+    .select("id, title, body, revoke_token, created_at, updated_at")
+    .eq("id", assertId(id))
+    .maybeSingle();
+  if (error || !data) return null;
+  return {
+    id: data.id,
+    title: data.title,
+    body: data.body,
+    revokeToken: data.revoke_token,
+    createdAt: new Date(data.created_at).getTime(),
+    updatedAt: new Date(data.updated_at).getTime(),
+  };
 }
 
 /**
@@ -53,9 +65,6 @@ export async function readShare(id) {
  * @returns {Promise<void>}
  */
 export async function deleteShare(id) {
-  try {
-    await unlink(fileFor(id));
-  } catch {
-    // Already gone.
-  }
+  const db = await admin();
+  await db.from("shared_notes").delete().eq("id", assertId(id));
 }
